@@ -13,11 +13,12 @@ namespace ETrade.Models
         public int PaymentTypeID { get; set; }
         
         [Required,MaxLength(100)]
-        public int TypeName { get; set; } // Kredi kartı , havale, çek
+        public string TypeName { get; set; } // Kredi kartı , havale, çek
        
         [MaxLength(150)]
         public string Description { get; set; }
 
         // Payments
+        public virtual ICollection<Payment> Payments { get; set; }
     }
 }

@@ -25,6 +25,7 @@ namespace ETrade.Models
         public string PostalCode { get; set; }
 
         // Orders
+        public virtual ICollection<Order> Orders { get; set; }
 
     }
 }

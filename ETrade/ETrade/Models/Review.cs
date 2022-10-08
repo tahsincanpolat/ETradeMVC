@@ -27,6 +27,8 @@ namespace ETrade.Models
         public bool IsDeleted { get; set; }
 
         // Customer, Product
+        public virtual Customer Customer { get; set; }
+        public virtual Product Product { get; set; }
 
     }
 }

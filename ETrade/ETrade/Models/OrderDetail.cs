@@ -23,6 +23,9 @@ namespace ETrade.Models
         public DateTime OrderDate { get; set; }
 
         // Order, Customer, Product
+        public virtual Customer Customer { get; set; }
+        public virtual Product Product { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
 
 
     }

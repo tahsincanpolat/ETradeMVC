@@ -29,7 +29,7 @@ namespace ETrade.Models
         public decimal Discount { get; set; }
         public int UnitInStock { get; set; }
         public int? UnitOnOrder { get; set; }
-        public bool? ProductAvaiable { get; set; }
+        public bool? ProductAvailable { get; set; }
         
         [Required]
         public string ImageUrl { get; set; }
@@ -46,6 +46,13 @@ namespace ETrade.Models
         public string Notes { get; set; }
 
         // SubCategory, Supplier, OrderDetails, RecentlyViews, Review, WishList
+        public virtual SubCategory SubCategory { get; set; }
+        public virtual Supplier Supplier { get; set; }
+
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual ICollection<RecentlyView> RecentlyView { get; set; }
+        public virtual ICollection<Review> Review { get; set; }
+        public virtual ICollection<WishList> WishLists { get; set; }
 
     }
 }

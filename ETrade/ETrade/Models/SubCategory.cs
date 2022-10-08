@@ -26,8 +26,9 @@ namespace ETrade.Models
         public bool isActive { get; set; }
 
         // category
-
-        // product
+        public virtual Category Category { get; set; }
+        // products
+        public virtual ICollection<Product> Products { get; set; }
 
 
     }

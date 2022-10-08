@@ -12,9 +12,9 @@ namespace ETrade.Models
         [Key]
         public int OrderID { get; set; }
 
-        [Required,ForeignKey("OrderDetail")]
+        [Required, ForeignKey("OrderDetail")]
         public int OrderDetailID { get; set; }
-        
+
         [Required, ForeignKey("Payment")]
         public int PaymentID { get; set; }
 
@@ -36,6 +36,9 @@ namespace ETrade.Models
         public bool CancelOrder { get; set; }
 
         // OrderDetail,Payment,Shipping Detail
+        public virtual OrderDetail OrderDetail { get; set;  }
+        public virtual Payment Payment { get; set; }
+        public virtual ShippingDetail ShippingDetail { get; set; }
 
     }
 }

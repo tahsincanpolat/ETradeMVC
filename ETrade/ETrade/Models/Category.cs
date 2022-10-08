@@ -23,6 +23,6 @@ namespace ETrade.Models
 
         public bool isActive { get; set; }
 
-        // subcategory
+        public virtual ICollection<Category> SubCategories { get; set; }
     }
 }

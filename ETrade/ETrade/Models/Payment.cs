@@ -21,5 +21,7 @@ namespace ETrade.Models
         public DateTime PaymentDateTime { get; set; }
 
         // Orders, PaymentType
+        public virtual ICollection<Order> Orders { get; set; }
+        public virtual PaymentType PaymentType { get; set; }
     }
 }

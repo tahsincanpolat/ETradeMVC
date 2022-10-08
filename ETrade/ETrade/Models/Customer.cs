@@ -42,6 +42,10 @@ namespace ETrade.Models
         public string Notes { get; set; }
 
         // Order details , wishlist, Review , Recently Views
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual ICollection<RecentlyView> RecentlyViews { get; set; }
+        public virtual ICollection<Review> Reviews { get; set; }
+        public virtual ICollection<WishList> WishLists { get; set; }
 
     }
 }

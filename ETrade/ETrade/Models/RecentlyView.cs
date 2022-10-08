@@ -20,7 +20,8 @@ namespace ETrade.Models
         public string Notes { get; set; }
 
         // Customer - Product
-
+        public virtual Customer Customer { get; set; }
+        public virtual Product Product { get; set; }
 
     }
 }

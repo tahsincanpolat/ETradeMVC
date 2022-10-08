@@ -27,8 +27,8 @@ namespace ETrade.Models
         [MaxLength(200)]
         public string Notes { get; set; }
 
-        // role
-        // admin employee
+        public virtual Role Role { get; set; }
+        public virtual AdminEmployee AdminEmployee { get; set; }
 
     }
 }

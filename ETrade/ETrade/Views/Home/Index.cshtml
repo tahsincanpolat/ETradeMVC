@@ -1,0 +1,30 @@
+﻿@using ETrade.Models
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+<div>
+    @{
+        foreach (var item in TempData["Meyve"] as IEnumerable<Product>)
+        {
+            <div>
+                <p>@item.Name</p>
+            </div>
+        }
+        foreach (var item in TempData["Sebze"] as IEnumerable<Product>)
+        {
+            <div>
+                <p>@item.Name</p>
+            </div>
+        }
+        foreach (var item in TempData["Pet"] as IEnumerable<Product>)
+        {
+            <div>
+                <p>@item.Name</p>
+            </div>
+        }
+    }
+</div>
+

@@ -1,30 +1,85 @@
 ﻿@using ETrade.Models
+@using System.Text.RegularExpressions
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
-<div>
-    @{
-        foreach (var item in TempData["Meyve"] as IEnumerable<Product>)
-        {
-            <div>
-                <p>@item.Name</p>
+<h2 class="mt-5 mb-5">EN ÇOK SATILAN ÜRÜNLER</h2>
+<div class="row mt-5">
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <button class="nav-link active" id="nav-home-tab" data-toggle="tab" data-target="#Meyve" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Meyve</button>
+            <button class="nav-link" id="nav-profile-tab" data-toggle="tab" data-target="#Sebze" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Sebze</button>
+            <button class="nav-link" id="nav-contact-tab" data-toggle="tab" data-target="#Pet" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Pet</button>
+        </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="Meyve" role="tabpanel" aria-labelledby="nav-home-tab">
+            <div class="row">
+                @{
+                    foreach (var item in TempData["Meyve"] as IEnumerable<Product>)
+                    {
+                        <div class="col-md-3">
+                            <div class="thumbnail">
+                                <img src="@Url.Content(item.ImageUrl)" alt="@Url.Content(item.AltText)" class="img-fluid"/>
+                                <div class="caption">
+                                    <h4 class="header">@item.Name</h4>
+                                    <p class="description">@WebUtility.HtmlDecode(Regex.Replace(@item.ShortDescription, "<[^>]*(>|$)",String.Empty))</p>
+                                    <p>
+                                        @Html.ActionLink("Ürün Detayı", "ProductDetail", "Product", new { id = item.ProductID }, new { @class = "btn btn-primary form-control" })
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                </div>
             </div>
-        }
-        foreach (var item in TempData["Sebze"] as IEnumerable<Product>)
-        {
-            <div>
-                <p>@item.Name</p>
+            <div class="tab-pane fade" id="Sebze" role="tabpanel" aria-labelledby="nav-profile-tab">
+                <div class="row">
+                    @{
+                        foreach (var item in TempData["Sebze"] as IEnumerable<Product>)
+                        {
+                            <div class="col-md-3">
+                                <div class="thumbnail">
+                                    <img src="@Url.Content(item.ImageUrl)" alt="@Url.Content(item.AltText)" class="img-fluid"/>
+                                    <div class="caption">
+                                        <h4 class="header">@item.Name</h4>
+                                        <p class="description">@WebUtility.HtmlDecode(Regex.Replace(@item.ShortDescription, "<[^>]*(>|$)", String.Empty))</p>
+                                        <p>
+                                            @Html.ActionLink("Ürün Detayı", "ProductDetail", "Product", new { id = item.ProductID }, new { @class = "btn btn-primary form-control" })
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
             </div>
-        }
-        foreach (var item in TempData["Pet"] as IEnumerable<Product>)
-        {
-            <div>
-                <p>@item.Name</p>
+            <div class="tab-pane fade" id="Pet" role="tabpanel" aria-labelledby="nav-contact-tab">
+                <div class="row">
+                    @{
+                        foreach (var item in TempData["Pet"] as IEnumerable<Product>)
+                        {
+                            <div class="col-md-3">
+                                <div class="thumbnail">
+                                    <img src="@Url.Content(item.ImageUrl)" alt="@Url.Content(item.AltText)" class="img-fluid"/>
+                                    <div class="caption">
+                                        <h4 class="header">@item.Name</h4>
+                                        <p class="description">@WebUtility.HtmlDecode(Regex.Replace(@item.ShortDescription, "<[^>]*(>|$)", String.Empty))</p>
+                                        <p>
+                                            @Html.ActionLink("Ürün Detayı", "ProductDetail", "Product", new { id = item.ProductID }, new { @class = "btn btn-primary form-control" })
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
             </div>
-        }
-    }
+        </div>
+
 </div>
+
 

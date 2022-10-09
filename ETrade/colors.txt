@@ -1,0 +1,5 @@
+blue: #0A122A
+green : #698F3F
+white: #FBFAF8
+bone : #E7DECD
+red : #804E49

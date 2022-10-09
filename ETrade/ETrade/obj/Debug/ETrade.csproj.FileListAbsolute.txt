@@ -75,10 +75,10 @@ D:\TahsinCanpolat\Web\repos\etrade\ETrade\ETrade\bin\tr\System.Web.Webpages.Depl
 D:\TahsinCanpolat\Web\repos\etrade\ETrade\ETrade\bin\tr\System.Web.Webpages.Razor.resources.dll
 D:\TahsinCanpolat\Web\repos\etrade\ETrade\ETrade\bin\tr\System.Web.Helpers.resources.dll
 D:\TahsinCanpolat\Web\repos\etrade\ETrade\ETrade\bin\tr\System.Web.Mvc.resources.dll
-D:\TahsinCanpolat\Web\repos\etrade\ETrade\ETrade\obj\Debug\ETrade.csproj.AssemblyReference.cache
 D:\TahsinCanpolat\Web\repos\etrade\ETrade\ETrade\obj\Debug\ETrade.csproj.CoreCompileInputs.cache
 D:\TahsinCanpolat\Web\repos\etrade\ETrade\ETrade\obj\Debug\ETrade.csproj.CopyComplete
 D:\TahsinCanpolat\Web\repos\etrade\ETrade\ETrade\obj\Debug\ETrade.dll
 D:\TahsinCanpolat\Web\repos\etrade\ETrade\ETrade\obj\Debug\ETrade.pdb
 D:\TahsinCanpolat\Web\repos\etrade\ETrade\ETrade\obj\Debug\ETrade.Migrations._0.resources
 D:\TahsinCanpolat\Web\repos\etrade\ETrade\ETrade\obj\Debug\ETrade.csproj.GenerateResource.cache
+D:\TahsinCanpolat\Web\repos\etrade\ETrade\ETrade\obj\Debug\ETrade.csproj.AssemblyReference.cache

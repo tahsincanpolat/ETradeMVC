@@ -1,0 +1,30 @@
+﻿@model IEnumerable<ETrade.Models.Product>
+@using System.Text.RegularExpressions
+
+@{
+    ViewBag.Title = "Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row mt-5">
+        @{
+            foreach (var item in Model)
+            {
+                <div class="col-md-3">
+                    <div class="thumbnail">
+                        <img src="@Url.Content(item.ImageUrl)" alt="@Url.Content(item.AltText)" class="img-fluid" />
+                        <div class="caption">
+                            <h4 class="header">@item.Name</h4>
+                            <p class="description">@WebUtility.HtmlDecode(Regex.Replace(@item.ShortDescription, "<[^>]*(>|$)", String.Empty))</p>
+                            <p>
+                                @Html.ActionLink("Ürün Detayı", "ProductDetail", "Product", new { id = item.ProductID }, new { @class = "btn btn-primary form-control" })
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        }
+    </div>
+</div>

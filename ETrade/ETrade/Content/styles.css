@@ -1,0 +1,74 @@
+﻿body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 20px;
+    background: #FBFAF8
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+.btn {
+    background-color: #0A122A;
+}
+
+.menu {
+    background-color: #698F3F;
+}
+
+.menuItem {
+    color:#FBFAF8 !important;
+    font-size: 18px;
+}
+.menuItem:hover {
+    text-decoration:underline
+}
+.user-info{
+    display:flex;
+    justify-content:space-between;
+    flex-direction:row
+}
+.user-info-button {
+    margin-right: 15px;
+    color: #FBFAF8
+}
+.user-info-button:hover {
+    color: #FBFAF8;
+    font-size:18px;
+    text-decoration:none
+}
+.thumbnail {
+    background: white;
+    text-align: center;
+    margin: 26px;
+    border-radius: 10px;
+    box-shadow: 3px 35px 56px -18px rgba(10,18,42,1);
+    padding: 7px;
+    height:550px
+}
+.caption {
+    padding: 10px;
+}
+.header {
+    font-weight: 700;
+    color: #804E49;
+    font-size:20px
+}
+.description {
+    font-size: 18px;
+    color: #0A122A;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    height:87px;
+}
+

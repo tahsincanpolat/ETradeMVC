@@ -24,14 +24,14 @@ namespace ETrade.Models
         public decimal Discount { get; set; }
         public decimal? Taxes { get; set; }
         public decimal TotalAmount { get; set; }
-        public bool IsComplated { get; set; }
+        public bool IsCompleted { get; set; }
         public DateTime OrderDate { get; set; }
-        public bool Dispached { get; set; }
-        public DateTime DispachDate { get; set; }
+        public bool Dispatched { get; set; }
+        public DateTime DispatchDate { get; set; }
         public bool Shipped { get; set; }
         public DateTime ShippedDate { get; set; }
         public bool Deliver { get; set; }
-        public DateTime DeliverDate { get; set; }
+        public DateTime DeliveryDate { get; set; }
         public string Notes { get; set; }
         public bool CancelOrder { get; set; }
 

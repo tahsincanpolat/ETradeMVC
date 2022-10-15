@@ -19,5 +19,7 @@ namespace ETrade.Controllers
         {
             return View(db.Products.Where(x=>x.SubCategoryID == id).ToList());
         }
+
+       
     }
 }

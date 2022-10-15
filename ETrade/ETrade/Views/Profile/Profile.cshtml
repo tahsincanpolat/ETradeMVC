@@ -1,0 +1,126 @@
+﻿@model ETrade.Models.Customer
+@{
+    ViewBag.Title = "Profil";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-3">
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <button class="nav-link active" id="nav-home-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Profilim</button>
+                <button class="nav-link" id="nav-profile-tab" data-toggle="tab" data-target="#orders" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Siparişlerim</button>
+
+            </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="nav-home-tab">
+                @using (Html.BeginForm("UpdateProfile","Profile",FormMethod.Post,new { @class = "profileForm p-3" })) {
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>Ad:</label>
+                        </div>
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(x => x.FirstName, new { @required = "required", @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>Soyad:</label>
+                        </div>
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(x => x.LastName, new { @required = "required", @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>Kullanıcı Adı:</label>
+                        </div>
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(x => x.UserName, new { @required = "required", @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>Parola:</label>
+                        </div>
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(x => x.Password, new { @required = "required", @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>Cinsiyet:</label>
+                        </div>
+                        <div class="col-md-10">
+                            Erkek: @Html.RadioButtonFor(m => m.Gender, true, new { Checked = "checked" })
+                            Kadın:  @Html.RadioButtonFor(m => m.Gender, false, new { Checked = "checked" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>Doğum Tarihiniz:</label>
+                        </div>
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(x => x.BirthDate, "{0:dd.MM.yyyy}", new { @required = "required", @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>Adresiniz:</label>
+                        </div>
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(x => x.Address, new { @required = "required", @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>Şehir:</label>
+                        </div>
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(x => x.City, new { @required = "required", @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>Ülke:</label>
+                        </div>
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(x => x.Country, new { @required = "required", @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row mt-3">
+                        <div class="col-md-10 col-md-offset-2 d-flex justify-content-start">
+                            <input type="submit" value="Profilimi Güncelle" class="form-control"/>
+                        </div>
+                    </div>
+                </div>
+
+                }
+            </div>
+            <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    <p>Siparişler</p>
+            </div>
+
+        </div>
+</div>
+
+

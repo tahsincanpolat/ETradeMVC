@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 d-flex justify-content-center">
+            @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+            {
+                <fieldset>
+                    <legend>Giriş Yap</legend>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12 d-flex justify-content-center">
+                                <input type="text" name="username" placeholder="Kullanıcı adınızı giriniz.." class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12 d-flex justify-content-center">
+                                <input type="password" name="password" placeholder="Parolanızı giriniz.." class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <div class="form-group">
+                        <div class="row d-flex justify-content-center mt-5">
+                            <div class="col-md-10 col-md-offset-2 text-center">
+                                <input type="submit" value="Giriş Yap" class="form-control btn btn-info" />
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+            }
+        </div>
+    </div>
+</div>
+

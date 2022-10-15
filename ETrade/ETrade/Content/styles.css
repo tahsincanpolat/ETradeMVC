@@ -16,6 +16,17 @@ select,
 textarea {
     max-width: 280px;
 }
+fieldset {
+    border: 1px solid #000000;
+    padding: 40px;
+    margin: 30px;
+}
+legend{
+    width:fit-content
+}
+form {
+    width: 50%;
+}
 .btn {
     background-color: #0A122A;
 }
@@ -70,5 +81,8 @@ textarea {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
     height:87px;
+}
+.profileForm{
+    width: 100% !important;
 }
 

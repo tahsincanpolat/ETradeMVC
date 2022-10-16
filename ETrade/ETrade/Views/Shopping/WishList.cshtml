@@ -1,0 +1,73 @@
+﻿@model IEnumerable<ETrade.Models.WishList>
+@{
+    ViewBag.Title = "WishList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container mt-3">
+    <h2>İstek Listeniz</h2>
+
+    <hr />
+    @{
+        if (Model.ToList().Count == 0)
+        {
+            <span class="lead">İstek Listeniz Boş...</span>
+        }
+        else
+        {
+            <table class="table table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th>Listenden Çıkar</th>
+                        <th>Ürün Görseli</th>
+                        <th>Ürün Adı</th>
+                        <th>Ürün Fiyatı</th>
+                        <th>Stok Miktarı</th>
+                        <th>Sepete Ekle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                  <a href="@Url.Action("RemoveFromList","Shopping",new { id = item.WishListID})" style="color:red;font-size:32px">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <img src="@Url.Content(item.Product.ImageUrl)" alt="@item.Product.AltText" />
+                                </td>
+                                <td>
+                                    @item.Product.Name
+                                </td>
+                                <td>
+                                    @string.Format("{0:C2}", item.Product.UnitPrice)
+                                </td>
+                                <td>
+                                    @item.Product.UnitInStock @item.Product.QuantityPerUnit
+                                </td>
+                                <td>
+                                    @{
+                                        if (item.Product.UnitInStock == 0)
+                                        {
+                                            <a style="font-size:32px;color:lightgray">
+                                                <i class="fa-solid fa-cart-shopping"></i>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="@Url.Action("AddToCartFromWishList","Shopping",new { id = item.WishListID})" style="font-size:32px;color:darkgreen">
+                                                <i class="fa-solid fa-cart-shopping"></i>
+                                            </a>
+                                        }
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        }
+    }
+</div>

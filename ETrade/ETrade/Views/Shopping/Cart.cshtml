@@ -1,0 +1,88 @@
+﻿@model IEnumerable<ETrade.Models.OrderDetail>
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container mt-3">
+    <h2>Sepetiniz</h2>
+    <hr />
+    @{      
+        if (Model.ToList().Count == 0)
+        {
+            <span class="lead">
+                Sepetiniz Boş...
+            </span>
+        }
+        else
+        {
+            <table class="table table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th>Sepetinden Çıkar</th>
+                        <th>Ürün Görseli</th>
+                        <th>Ürün Adı</th>
+                        <th>Ürün Fiyatı</th>
+                        <th>Ürün Miktarı</th>
+                        <th>Miktar Güncelle</th>
+                        <th>İstek Listesine Ekle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ 
+                        decimal toplamTutar = 0;
+                        foreach (var item in Model)
+                        {
+                            toplamTutar += item.TotalAmount;
+                            <tr>
+                                <td>
+                                    <a href="@Url.Action("RemoveFromCart","Shopping",new { id = item.OrderDetailID })" style="color:red;font-size:32px">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <img src="@Url.Content(item.Product.ImageUrl)" alt="@Url.Content(item.Product.AltText)" class="img-fluid"/>
+                                </td>
+                                <td>@item.Product.Name</td>
+                                <td>@string.Format("{0:C2}",item.UnitPrice)</td>
+                                <td>@item.Quantity @item.Product.QuantityPerUnit</td>
+                                <td>
+                                    @using (Html.BeginForm("UpdateQuantity","Shopping", new { id = item.OrderDetailID }, FormMethod.Post))
+                                    {
+                                    <div class="d-flex justify-content-between">
+                                        <input type="number" name="quantity" value="@item.Quantity" max="@item.Product.UnitInStock" style="max-width:60px;margin-right:5px" />
+                                        <button type="submit" class="btn" style="color: aliceblue;">
+                                            <i class="fa-solid fa-check"></i>
+                                        </button>
+                                    </div>
+                                     
+                                    }
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("AddWishListFromCart","Shopping",new { id = item.OrderDetailID })" style="color:red;font-size:32px">
+                                        <i class="fa-solid fa-heart"></i>
+                                    </a>
+                                </td>
+                            </tr>  
+                        }
+                     }
+                </tbody>
+            </table>
+            <div class="d-flex justify-content-between" >
+                <div>
+                    <p style="font-size:24px">
+                        <b>
+                            Toplam Tutar : @string.Format("{0:C2}", toplamTutar)
+                        </b>
+                    </p>
+                </div>
+                <div>
+                    @Html.ActionLink("Siparişi Tamamla", "GoToPayment", "Shopping", null, new { @class = "btn btn-success", @style = "float:right" })
+                </div>
+            </div>
+          
+        }
+       
+    }
+</div>
+
+

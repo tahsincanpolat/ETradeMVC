@@ -117,7 +117,48 @@
                 }
             </div>
             <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="nav-profile-tab">
-                    <p>Siparişler</p>
+                   <table class="table table-bordered text-center mt-3">
+                       <thead>
+                           <tr>
+                               <th>Ürün Adı</th>
+                               <th>Ürün Görseli</th>
+                               <th>Ürün Miktarı</th>
+                               <th>Sipariş Tarihi</th>
+                               <th>Kargolama Tarihi</th>
+                           </tr>
+                       </thead>
+                       <tbody>
+                           @{
+                               foreach (var item in ViewBag.orderID as IEnumerable<ETrade.Models.OrderDetail>)
+                               {
+                                   foreach (var order in ViewBag.order as IEnumerable<ETrade.Models.Order>)
+                                   {
+                                       if (order.OrderDetailID == item.OrderDetailID)
+                                       {
+                                            <tr>
+                                                <td>
+                                                    <p>@item.Product.Name</p>
+                                                </td>
+                                                <td>
+                                                    <img class="img-fluid" src="@Url.Content(@item.Product.ImageUrl)" alt="@item.Product.AltText"/>
+                                                </td>
+                                                <td>
+                                                    <p>@item.Quantity @item.Product.QuantityPerUnit</p>
+                                                </td>
+                                                <td>
+                                                    <p>@order.OrderDate</p>
+                                                </td>
+                                                <td>
+                                                    <p>@order.ShippedDate</p>
+                                                </td>
+                                            </tr>
+                                       }
+
+                                   }
+                               }
+                           }
+                       </tbody>
+                   </table>
             </div>
 
         </div>

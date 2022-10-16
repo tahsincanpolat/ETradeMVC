@@ -27,6 +27,12 @@ legend{
 form {
     width: 50%;
 }
+table{
+    background-color:#ffffff;
+}
+td{
+    vertical-align:middle !important
+}
 .btn {
     background-color: #0A122A;
 }

@@ -20,6 +20,13 @@ namespace ETrade.Controllers
             return View(db.Products.Where(x=>x.SubCategoryID == id).ToList());
         }
 
+        public ActionResult ProductDetail(int id)
+        {
+            ViewData["Reviews"] = db.Reviews.Where(x=>x.ProductID == id && x.IsDeleted == false).ToList();
+            Product product = db.Products.Find(id);
+            return View(product);
+        }
+
        
     }
 }

@@ -1,0 +1,121 @@
+﻿@model ETrade.Models.Product
+@{
+    ViewBag.Title = "ProductDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-4">
+            <div class="img-thumbnail">
+                <img src="@Url.Content(Model.ImageUrl)" alt="@Url.Content(Model.AltText)"/>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <h2>@Model.Name</h2>
+            <p class="lead">Fiyat: @string.Format("{0:C2}", Model.UnitPrice)</p>
+            <p class="lead">Stok Miktarı: @Model.UnitInStock</p>
+            @using (Html.BeginForm("ShoppingAddToCart", "Shopping", new { id = Model.ProductID }, FormMethod.Post))
+            {
+                <p class="lead mb-5">
+                    @{
+                        if (Model.UnitInStock > 0)
+                        {
+                            <strong>Miktar: </strong>
+                            <input type="number" name="quantity" value="1" max="@Model.UnitInStock" min="1" />
+                        }
+                        else
+                        {
+                            <span class="alert-danger">Ürün stokta bulunmamaktadır.</span>
+                        }
+                    }
+                </p>
+                if (Model.UnitInStock <= 0)
+                {
+                    <input type="submit" value="Sepete Ekle" class="btn btn-success btn-lg" disabled="disabled" />
+                }
+                else
+                {
+                    <input type="submit" value="Sepete Ekle" class="btn btn-success btn-lg"/>
+                }
+                <a href="@Url.Action("AddWishList","Shopping", new { id = Model.ProductID})" class="btn btn-warning btn-lg">İstek Listesine Ekle</a>
+            }
+        </div>
+
+    </div>
+    <div class="mt-3">
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <button class="nav-link active" id="nav-home-tab" data-toggle="tab" data-target="#Description" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Ürün Açıklaması</button>
+                    <button class="nav-link" id="nav-profile-tab" data-toggle="tab" data-target="#Reviews" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Yorumlar</button>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active mt-3" id="Description" role="tabpanel" aria-labelledby="nav-home-tab">
+                       @Html.Raw(Model.LongDescription)
+                </div>
+                <div class="tab-pane fade mt-3" id="Reviews" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    <ul class="p-0">
+                        @{
+                            if ((ViewData["Reviews"] as IEnumerable<ETrade.Models.Review>).Count() == 0)
+                            {
+                                <li class="list-unstyled">Bu ürün hakkında henüz yorum yapılmamıştır..</li>
+                            }
+                            else
+                            {
+                                foreach (var review in ViewData["Reviews"] as IEnumerable<ETrade.Models.Review>)
+                                {
+                                    <li>
+                                        <p><strong>@(review.Name !=null? @review.Name : "Anonim") </strong></p>
+                                        <p>@review.Comment</p>
+                                    </li>
+                                }
+                            }
+                        }
+                    </ul>
+                    @{
+                        if (Session["OnlineKullanici"] != null)
+                        {
+                            <hr />
+                            <h4>Yorum Ekle</h4>
+                            <hr />
+                            using (Html.BeginForm("AddReview", "Product", new { id = Model.ProductID }, FormMethod.Post))
+                            {
+                                <p>
+                                    <strong>Ürünü Oyla</strong>
+                                    <input type="number" id="rate" value="5" min="1" max="5" class="input-lg w-25" name="rate" onchange="denetle(this.value,5)" />
+                                </p>
+                                <p>
+                                    <strong>Adınız:</strong>
+                                    <input type="text" class="form-control" name="name" />
+                                </p>
+                                <p>
+                                    <strong>Yorumunuz:</strong>
+                                    <textarea name="review" class="form-control"></textarea>
+                                </p>
+                                <input type="submit" class="btn btn-info form-control" value="Yorum Yap"/> 
+                            }
+                        }
+                    }
+                </div>
+                
+            </div>
+
+    </div>
+</div>
+@section scripts{
+   <script>
+       function denetle(input,maxValue) {
+           var value = document.getElementById("rate").value;
+           console.log(value);
+           if (value > maxValue) {
+               document.getElementById("rate").value = maxValue;
+           }
+           if (value < 0) {
+               document.getElementById("rate").value = 0;
+           }
+       }
+    </script>
+    
+}
+

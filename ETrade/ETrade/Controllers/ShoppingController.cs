@@ -57,6 +57,17 @@ namespace ETrade.Controllers
             return Redirect(Request.UrlReferrer.ToString());
         }
 
+        [HttpPost]
+        public ActionResult UpdateQuantity(int id, FormCollection frm)
+        {
+            OrderDetail od = db.OrderDetails.Find(id);
+            od.Quantity = int.Parse(frm["quantity"]);
+            od.TotalAmount = od.Quantity * od.UnitPrice * (1 - od.Discount);
+            db.SaveChanges();
+
+            return RedirectToAction("Cart","Shopping");
+        }
+
         #region Methods
 
         public void ControlCart(int id, int miktar = 1)

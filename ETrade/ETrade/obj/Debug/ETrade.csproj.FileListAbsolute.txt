@@ -81,3 +81,4 @@ D:\TahsinCanpolat\Web\repos\etrade\ETrade\ETrade\obj\Debug\ETrade.dll
 D:\TahsinCanpolat\Web\repos\etrade\ETrade\ETrade\obj\Debug\ETrade.pdb
 D:\TahsinCanpolat\Web\repos\etrade\ETrade\ETrade\obj\Debug\ETrade.Migrations._0.resources
 D:\TahsinCanpolat\Web\repos\etrade\ETrade\ETrade\obj\Debug\ETrade.csproj.GenerateResource.cache
+D:\TahsinCanpolat\Web\repos\etrade\ETrade\ETrade\obj\Debug\ETrade.csproj.AssemblyReference.cache

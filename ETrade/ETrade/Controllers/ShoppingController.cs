@@ -18,6 +18,8 @@ namespace ETrade.Controllers
         }
         public ActionResult WishList()
         {
+            Session["CartCount"] = db.OrderDetails.Where(x => x.IsCompleted == false && x.CustomerID == TemporaryUserData.UserID).Count();
+            Session["WishListCount"] = db.WishLists.Where(x => x.IsActive == true && x.CustomerID == TemporaryUserData.UserID).Count();
             return View(db.WishLists.Where(x=>x.IsActive == true && x.CustomerID == TemporaryUserData.UserID).ToList());
         }
         public ActionResult RemoveFromList(int id) 
@@ -25,6 +27,7 @@ namespace ETrade.Controllers
             WishList wishlist = db.WishLists.Find(id);
             wishlist.IsActive = false;
             db.SaveChanges();
+            Session["WishListCount"] = db.WishLists.Where(x => x.IsActive == true && x.CustomerID == TemporaryUserData.UserID).Count();
             return RedirectToAction("Wishlist","Shopping");
         
         }
@@ -39,6 +42,8 @@ namespace ETrade.Controllers
 
         public ActionResult Cart()
         {
+            Session["CartCount"] = db.OrderDetails.Where(x => x.IsCompleted == false && x.CustomerID == TemporaryUserData.UserID).Count();
+            Session["WishListCount"] = db.WishLists.Where(x => x.IsActive == true && x.CustomerID == TemporaryUserData.UserID).Count();
             return View(db.OrderDetails.Where(x=> x.IsCompleted == false && x.CustomerID == TemporaryUserData.UserID).ToList());
         }
 
@@ -46,13 +51,15 @@ namespace ETrade.Controllers
         {
             db.OrderDetails.Remove(db.OrderDetails.Find(id));
             db.SaveChanges();
+            Session["CartCount"] = db.OrderDetails.Where(x => x.IsCompleted == false && x.CustomerID == TemporaryUserData.UserID).Count();
             return Redirect(Request.UrlReferrer.ToString());
         }
         public ActionResult AddWishListFromCart(int id)
         {
             int productId = db.OrderDetails.Find(id).ProductID;
-            ControlWishList(productId);
             db.OrderDetails.Remove(db.OrderDetails.Find(id));
+                        ControlWishList(productId);
+
             db.SaveChanges();
             return Redirect(Request.UrlReferrer.ToString());
         }
@@ -66,6 +73,50 @@ namespace ETrade.Controllers
             db.SaveChanges();
 
             return RedirectToAction("Cart","Shopping");
+        }
+        public ActionResult ShoppingAddToCart(int id, FormCollection frm)
+        {
+            if(Session["OnlineKullanici"] == null)
+            {
+                return RedirectToAction("Login","Login");
+            }
+
+            int miktar = Convert.ToInt32(frm["quantity"]);
+
+            ControlCart(id,miktar);
+            return RedirectToAction("ProductDetail","Product",new { id = id });
+
+
+        }
+
+        public ActionResult AddWishList(int id)
+        {
+            if (Session["OnlineKullanici"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+
+
+            ControlWishList(id);
+            return RedirectToAction("ProductDetail", "Product", new { id = id });
+
+        }
+
+        public ActionResult GoToPayment()
+        {
+            List<OrderDetail> cart = db.OrderDetails.Where(x => x.IsCompleted == false && x.CustomerID == TemporaryUserData.UserID).ToList();
+
+            foreach (var item in cart)
+            {
+                if(item.Product.UnitInStock < item.Quantity)
+                {
+                    return RedirectToAction("Cart","Shopping");
+                }
+            }
+
+            ViewBag.OrderDetails = cart;
+            ViewBag.PaymentTypes = db.PaymentTypes.ToList();
+            return View(db.Customers.Find(TemporaryUserData.UserID));
         }
 
         #region Methods
@@ -103,6 +154,9 @@ namespace ETrade.Controllers
                     od.TotalAmount = od.Quantity * od.UnitPrice * (1 - od.Discount);
                 }
             }
+            Session["CartCount"] = db.OrderDetails.Where(x => x.IsCompleted == false && x.CustomerID == TemporaryUserData.UserID).Count();
+            Session["WishListCount"] = db.WishLists.Where(x => x.IsActive == true && x.CustomerID == TemporaryUserData.UserID).Count();
+
             db.SaveChanges();
         }
 
@@ -118,6 +172,9 @@ namespace ETrade.Controllers
                 db.WishLists.Add(wishlist);
                 db.SaveChanges();
             }
+            Session["CartCount"] = db.OrderDetails.Where(x => x.IsCompleted == false && x.CustomerID == TemporaryUserData.UserID).Count();
+            Session["WishListCount"] = db.WishLists.Where(x => x.IsActive == true && x.CustomerID == TemporaryUserData.UserID).Count();
+
         }
 
         #endregion

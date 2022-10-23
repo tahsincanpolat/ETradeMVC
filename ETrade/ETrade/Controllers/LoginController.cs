@@ -48,6 +48,8 @@ namespace ETrade.Controllers
             db.SaveChanges();
             Session["OnlineKullanici"] = null;
             TemporaryUserData.UserID = 0;
+            Session["CartCount"] = 0;
+            Session["WishListCount"] = 0;
             return RedirectToAction("Index","Home");
         }
 

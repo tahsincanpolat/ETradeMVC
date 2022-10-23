@@ -13,7 +13,26 @@
         </div>
         <div class="col-md-8">
             <h2>@Model.Name</h2>
-            <p class="lead">Fiyat: @string.Format("{0:C2}", Model.UnitPrice)</p>
+            @{
+                int rate = 0;
+                foreach (var item in ViewData["Reviews"] as IEnumerable<ETrade.Models.Review>)
+                {
+                    if (item.Rate <= 5)
+                    {
+                        rate = item.Rate;
+                    }
+                }
+                for (int i = 1; i <= rate; i++)
+                {
+                    <i class="fa-solid fa-star complate"></i>
+                }
+                for (int i = 1; i <= 5 - rate; i++)
+                {
+                    <i class="fa-solid fa-star uncomplate"></i>
+                }
+
+            }
+            <p class="lead mt-3">Fiyat: @string.Format("{0:C2}", Model.UnitPrice)</p>
             <p class="lead">Stok Miktarı: @Model.UnitInStock</p>
             @using (Html.BeginForm("ShoppingAddToCart", "Shopping", new { id = Model.ProductID }, FormMethod.Post))
             {
@@ -22,7 +41,7 @@
                         if (Model.UnitInStock > 0)
                         {
                             <strong>Miktar: </strong>
-                            <input type="number" name="quantity" value="1" max="@Model.UnitInStock" min="1" />
+                            <input type="number" name="quantity" id="quantity"  value="1" max="@Model.UnitInStock" min="1" onchange="denetleStock(@Model.UnitInStock)" />
                         }
                         else
                         {
@@ -36,7 +55,7 @@
                 }
                 else
                 {
-                    <input type="submit" value="Sepete Ekle" class="btn btn-success btn-lg"/>
+                    <input type="submit" value="Sepete Ekle" class="btn btn-success btn-lg" />
                 }
                 <a href="@Url.Action("AddWishList","Shopping", new { id = Model.ProductID})" class="btn btn-warning btn-lg">İstek Listesine Ekle</a>
             }
@@ -83,7 +102,7 @@
                             {
                                 <p>
                                     <strong>Ürünü Oyla</strong>
-                                    <input type="number" id="rate" value="5" min="1" max="5" class="input-lg w-25" name="rate" onchange="denetle(this.value,5)" />
+                                    <input type="number" id="rate" value="5" min="1" max="5" class="input-lg w-25" name="rate" onchange="denetle(5)" />
                                 </p>
                                 <p>
                                     <strong>Adınız:</strong>
@@ -105,14 +124,22 @@
 </div>
 @section scripts{
    <script>
-       function denetle(input,maxValue) {
+       function denetle(maxValue) {
            var value = document.getElementById("rate").value;
-           console.log(value);
            if (value > maxValue) {
                document.getElementById("rate").value = maxValue;
            }
            if (value < 0) {
                document.getElementById("rate").value = 0;
+           }
+       }
+       function denetleStock(maxValue) {
+           var value = document.getElementById("quantity").value;
+           if (value > maxValue) {
+               document.getElementById("quantity").value = maxValue;
+           }
+           if (value < 0) {
+               document.getElementById("quantity").value = 0;
            }
        }
     </script>

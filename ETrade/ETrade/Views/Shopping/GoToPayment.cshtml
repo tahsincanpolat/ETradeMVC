@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "GoToPayment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row m-5">
+    @if (Session["OnlineKullanici"]!=null) { 
+    <div class="col-md-6 d-flex justify-content-end">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Ürün Adı</th>
+                    <th>Ürün Adeti</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    decimal toplamTutar = 0;
+                    foreach (var item in ViewBag.OrderDetails as IEnumerable<ETrade.Models.OrderDetail>)
+                    {
+                        if (item.Quantity > 0)
+                        {
+                            <tr>
+                                <td>@item.Product.Name</td>
+                                <td>@item.Quantity</td>
+                            </tr>
+                            toplamTutar += item.TotalAmount;
+                        }
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6">
+        <p>
+            Toplam Tutar: <strong>@string.Format("{0:C2}", toplamTutar)</strong>
+        </p>
+        <p>
+            @Html.ActionLink("Sepetini Düzenle", "Cart", "Shopping", null, new { @class = "btn btn-warning" })
+        </p>
+        @if (toplamTutar > 0)
+        {
+            @Html.ActionLink("Siparişi Tamamla", "CompleteShopping", "Shopping", null, new { @class = "btn btn-warning" })
+
+        }
+    </div>
+    }
+    else
+    {
+        <div class="col-md-8 d-flex justify-content-center" >
+            <p class="lead"> Sipariş Verebilmeniz için giriş yapmalısınız.</p>
+        </div>
+    }
+   
+</div>
+

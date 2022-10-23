@@ -266,6 +266,7 @@
     <Content Include="Views\Shopping\WishList.cshtml" />
     <Content Include="Views\Shopping\Cart.cshtml" />
     <Content Include="Views\Product\ProductDetail.cshtml" />
+    <Content Include="Views\Shopping\GoToPayment.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -17,7 +17,7 @@ namespace ETrade.Models
         public string LastName { get; set; }
         [Required]
         public string Email { get; set; }
-        public string Phone { get; set; }
+        public string Mobile { get; set; }
         [Required]
         public string Address { get; set; }
         [Required]

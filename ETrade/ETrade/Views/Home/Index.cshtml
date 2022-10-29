@@ -27,7 +27,7 @@
                                         <h4 class="header">@item.Name</h4>
                                         <p class="description">@WebUtility.HtmlDecode(Regex.Replace(@item.ShortDescription, "<[^>]*(>|$)", String.Empty))</p>
                                         <p>
-                                            @Html.ActionLink("Ürün Detayı", "ProductDetail", "Product", new { id = item.ProductID }, new { @class = "btn btn-primary form-control" })
+                                            @Html.ActionLink("Ürün Detayı", "ProductDetail", "Product", new { id = item.ProductID }, new { @class = "button btn btn-primary form-control" })
                                         </p>
                                     </div>
                                 </div>

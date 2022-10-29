@@ -10,7 +10,7 @@ namespace ETrade.Models
     public class PaymentType
     {
         [Key]
-        public int PaymentTypeID { get; set; }
+        public int PayTypeID { get; set; }
         
         [Required,MaxLength(100)]
         public string TypeName { get; set; } // Kredi kartı , havale, çek

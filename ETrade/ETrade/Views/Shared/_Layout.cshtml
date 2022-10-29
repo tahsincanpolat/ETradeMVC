@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -22,48 +23,76 @@
             @Html.ActionLink("Meyve", "Product", "Product", new { id = 2 }, new { @class = "navbar-brand menuItem" })
             @Html.ActionLink("Sebze", "Product", "Product", new { id = 3 }, new { @class = "navbar-brand menuItem" })
             @Html.ActionLink("Pet", "Product", "Product", new { id = 4 }, new { @class = "navbar-brand menuItem" })
-        <div class="nav navbar-nav navbar-right">
-            @{
-                if (Session["OnlineKullanici"] == null)
-                {
-                    <div>
-                        <a href="@Url.Action("Login", "Login")" class="user-info-button">
-                            <i class="fa-solid fa-right-to-bracket">
-                            </i>
-                        </a>
-                        <a href="@Url.Action("Register", "Login")" class="user-info-button">
-                            <i class="fa-solid fa-user-plus">
-                            </i>
-                        </a>
+            <div class="nav navbar-nav navbar-right">
+                @{
+                    if (Session["OnlineKullanici"] == null)
+                    {
+                        <div>
+                            <a href="@Url.Action("Login", "Login")" class="user-info-button">
+                                <i class="fa-solid fa-right-to-bracket">
+                                </i>
+                            </a>
+                            <a href="@Url.Action("Register", "Login")" class="user-info-button">
+                                <i class="fa-solid fa-user-plus">
+                                </i>
+                            </a>
 
-                    </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div>
+                            <a href="@Url.Action("Profile", "Profile")" class="user-info-button">
+                                <i class="fa-solid fa-user"></i>
+                            </a>
+                            <a href="@Url.Action("Cart", "Shopping")" class="user-info-button cart">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                                <span class="cart-count">
+                                    @{
+                                        if (int.Parse(Session["CartCount"].ToString()) > 9)
+                                        {
+                                            <span>9+</span>
+                                        }
+                                        else
+                                        {
+                                            <span>@Session["CartCount"]</span>
+                                        }
+                                    }
+
+                                </span>
+                            </a>
+                            <a href="@Url.Action("WishList", "Shopping")" class="user-info-button wish">
+                                <i class="fa-solid fa-bookmark"></i>
+                                <span class="wish-count">
+                                    @{
+                                        if (int.Parse(Session["WishListCount"].ToString()) > 9)
+                                        {
+                                            <span>9+</span>
+                                        }
+                                        else
+                                        {
+                                            <span>@Session["WishListCount"]</span>
+                                        }
+                                    }
+
+                                </span>
+                            </a>
+                            <a href="@Url.Action("Logout", "Login")" class="user-info-button">
+                                <i class="fa-solid fa-right-from-bracket"></i>
+                            </a>
+                        </div>
+                    }
                 }
-                else
-                {
-                    <div>
-                        <a href="@Url.Action("Profile", "Profile")" class="user-info-button">
-                            <i class="fa-solid fa-user"></i>
-                        </a>
-                        <a href="@Url.Action("Cart", "Shopping")" class="user-info-button">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                        </a>
-                        <a href="@Url.Action("WishList", "Shopping")" class="user-info-button">
-                            <i class="fa-solid fa-bookmark"></i>
-                        </a>
-                        <a href="@Url.Action("Logout", "Login")" class="user-info-button">
-                            <i class="fa-solid fa-right-from-bracket"></i>
-                        </a>
-                    </div>
-                }
-            }
-        </div>
-           
+            </div>
+
         </div>
     </div>
 
     <div class="container-fluid">
         @RenderBody()
     </div>
+
+    @RenderSection("scripts", false)
 
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
